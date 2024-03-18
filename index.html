@@ -39,13 +39,16 @@
         FB.login(function (res) {
           console.log(res);
           if (res.status === 'connected') {
-            FB.api('/me', function (res) {
+            FB.api('/me?fields=email,picture', function (res) {
               console.log(res);
               console.log('你好!' + res.name);
             });
           } else {
             console.log('尚未登入');
           }
+        }, {
+          scope: 'email, public_profile',
+          return_scopes: true
         });
       })
 
