@@ -7,20 +7,13 @@
   <title>FB登入測試</title>
   <!-- js -->
   <script src="./js/jquery-3.6.1.min.js"></script>
-  <style>
-    .box {
-      border-radius: 50%;
-    }
-  </style>
 </head>
 
 <body>
 
   <input type="button" class="login" value="登入">
   <input type="button" class="logout" value="登出">
-  <div class="box">
-    <img src="" alt="">
-  </div>
+  <div class="box"></div>
 
 
   <script>
@@ -50,7 +43,7 @@
             FB.api('/me?fields=name,id,email,picture', function (res) {
               console.log(res);
               console.log('信箱' + res.email);
-              $('img').attr('src', res.picture.data.url)
+              $('box').css('background-image', `url(${res.picture.data.url})`)
             });
           } else {
             console.log('尚未登入');
@@ -64,7 +57,7 @@
       $('.logout').click(function () {
         FB.logout(function (res) {
           console.log(res);
-          $('img').attr('src', '')
+          $('box').css('background-image', 'url("")')
         });
       })
 
