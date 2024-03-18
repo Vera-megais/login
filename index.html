@@ -43,7 +43,7 @@
             FB.api('/me?fields=name,id,email,picture', function (res) {
               console.log(res);
               console.log('信箱' + res.email);
-              $('.box').css('background-image', `url(${res.picture.data.url})`)
+              $('.box').css('background-image', 'url(' + res.picture.data.url + ')')
             });
           } else {
             console.log('尚未登入');
