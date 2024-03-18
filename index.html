@@ -39,7 +39,7 @@
         FB.login(function (res) {
           console.log(res);
           if (res.status === 'connected') {
-            FB.api('/me?fields=email,picture', function (res) {
+            FB.api('/me?fields=name,id,email,picture', function (res) {
               console.log(res);
               console.log('你好!' + res.name);
             });
