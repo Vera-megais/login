@@ -13,6 +13,7 @@
 
   <input type="button" class="login" value="登入">
   <input type="button" class="logout" value="登出">
+  <img src="" alt="">
 
   <script>
 
@@ -41,6 +42,7 @@
             FB.api('/me?fields=name,id,email,picture', function (res) {
               console.log(res);
               console.log('信箱' + res.email);
+              $('img').attr('src', res.picture.data.url)
             });
           } else {
             console.log('尚未登入');
