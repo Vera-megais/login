@@ -37,11 +37,10 @@
 
       $('.login').click(function () {
         FB.login(function (res) {
-          console.log(res);
           if (res.status === 'connected') {
             FB.api('/me?fields=name,id,email,picture', function (res) {
               console.log(res);
-              console.log('你好!' + res.name);
+              console.log('信箱' + res.email);
             });
           } else {
             console.log('尚未登入');
