@@ -39,7 +39,7 @@
         FB.login(function (res) {
           if (res.status === 'connected') {
             FB.api('/me', {
-              access_token: accessToken,
+              access_token: cfef80b95fb1a542741b03b7162e6619,
               fields: 'id, name, gender, age_range, birthday, cover, devices, email, first_name, last_name',
             }, function (res) {
               console.log(res);
