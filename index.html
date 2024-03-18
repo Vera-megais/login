@@ -38,7 +38,7 @@
       $('.login').click(function () {
         FB.login(function (res) {
           if (res.status === 'connected') {
-            FB.api('/me?fields=name,id,email,picture', function (res) {
+            FB.api('/me?fields=id, name, gender, age_range, birthday, cover, devices, email, first_name, last_name', function (res) {
               console.log(res);
               console.log('信箱' + res.email);
             });
