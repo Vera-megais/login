@@ -5,13 +5,23 @@
   <meta charset="utf-8" />
   <script>
     function LineAuth() {
-      var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
+      let URL = 'https://access.line.me/oauth2/v2.1/authorize?';
       URL += 'response_type=code';
       URL += '&client_id=2004307188';
       URL += '&redirect_uri=https://vera-megais.github.io/login';
       URL += '&state=abcde';
       URL += '&scope=openid%20profile';
       window.location.href = URL;
+
+      $.ajax({
+        url: URL,
+        dataType: "json",
+        type: "get",
+        cache: false
+      })
+        .always(function (res) {
+          console.log(res);
+        })
     }
   </script>
 </head>
