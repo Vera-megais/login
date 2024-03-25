@@ -1,85 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FB登入測試</title>
-  <!-- js -->
-  <script src="./js/jquery-3.6.1.min.js"></script>
+  <title></title>
+  <meta charset="utf-8" />
+  <script>
+    function LineAuth() {
+      var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
+      URL += 'response_type=code';
+      URL += '&client_id=2004307188';
+      URL += '&redirect_uri=https://vera-megais.github.io/login/customer/auth/line/callback';
+      URL += '&state=abcde';
+      URL += '&scope=openid%20profile';
+      window.location.href = URL;
+    }
+  </script>
 </head>
 
 <body>
-
-  <input type="button" class="login" value="登入">
-  <input type="button" class="logout" value="登出">
-  <div class="box"></div>
-
-
-  <script>
-
-    $(function () {
-      (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-
-      window.fbAsyncInit = function () {
-        FB.init({
-          appId: '1123697398667586',
-          cookie: true,
-          xfbml: true,
-          version: 'v19.0'
-        });
-        FB.AppEvents.logPageView();
-      };
-
-      $('.login').click(function () {
-        FB.login(function (res) {
-          if (res.status === 'connected') {
-            FB.api('/me?fields=name,id,email,picture', function (res) {
-              console.log(res);
-              console.log('信箱' + res.email);
-              $('.box').css({
-                'background-image': 'url(' + res.picture.data.url + ')',
-                'width': '50px',
-                'height': '50px',
-                'border-radius': '50%'
-              })
-            });
-          } else {
-            console.log('尚未登入');
-          }
-        }, {
-          scope: 'email, public_profile',
-          return_scopes: true
-        });
-      })
-
-      $('.logout').click(function () {
-        FB.logout(function (res) {
-          console.log(res);
-          $('.box').css({
-            'background-image': 'url("")',
-            'width': '0',
-            'height': '0',
-            'border-radius': '0'
-          })
-        });
-      })
-
-
-
-
-    })
-
-
-
-  </script>
-
+  <button onclick="LineAuth()">點選 Line Login</button>
 </body>
 
 </html>
