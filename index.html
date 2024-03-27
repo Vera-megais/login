@@ -43,12 +43,10 @@
         client_secret: "d4250f65da12f7adf52e243c214dcdf0"
       },
       type: "post",
-      cache: true
+      cache: false
     })
       .done(function (res) {
-        localStorage.setItem("userInfo", JSON.stringify(res));
-        localStorage.setItem("status", "成功");
-        let img = JSON.parse(localStorage.getItem("userInfo")).id_token;
+        let img = JSON.parse(JSON.stringify(res)).id_token;
         const data = parseJwt(img);
         $("img").attr("src", data.picture)
       })
