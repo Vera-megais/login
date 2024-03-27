@@ -44,7 +44,7 @@
           client_secret: "d4250f65da12f7adf52e243c214dcdf0"
         },
         type: "post",
-        cache: false
+        cache: true
       })
         .done(function (res) {
           localStorage.setItem("userInfo", JSON.stringify(res));
