@@ -20,7 +20,7 @@
   <img src="" alt="">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
   <script>
-    $('#lineLoginBtn').on('click', async function (e) {
+    $('#lineLoginBtn').on('click', function (e) {
       let client_id = '2004331642';
       let redirect_uri = 'https://vera-megais.github.io/login/';
       let link = 'https://access.line.me/oauth2/v2.1/authorize?';
@@ -30,33 +30,31 @@
       link += '&state=login';
       link += '&scope=openid%20profile';
       window.location.href = link;
-
-
-
-      await $.ajax({
-        url: "https://api.line.me/oauth2/v2.1/token",
-        dataType: "json",
-        data: {
-          grant_type: "authorization_code",
-          code: new URL(location.href).searchParams.get("code"),
-          redirect_uri: "https://vera-megais.github.io/login/",
-          client_id: 2004331642,
-          client_secret: "d4250f65da12f7adf52e243c214dcdf0"
-        },
-        type: "post",
-        cache: true
-      })
-        .done(function (res) {
-          localStorage.setItem("userInfo", JSON.stringify(res));
-          localStorage.setItem("status", "成功");
-          let img = JSON.parse(localStorage.getItem("userInfo")).id_token;
-          const data = parseJwt(img);
-          $("img").attr("src", data.picture)
-        })
-        .fail(function () {
-          localStorage.setItem("status", "失敗");
-        })
     });
+
+    $.ajax({
+      url: "https://api.line.me/oauth2/v2.1/token",
+      dataType: "json",
+      data: {
+        grant_type: "authorization_code",
+        code: new URL(location.href).searchParams.get("code"),
+        redirect_uri: "https://vera-megais.github.io/login/",
+        client_id: 2004331642,
+        client_secret: "d4250f65da12f7adf52e243c214dcdf0"
+      },
+      type: "post",
+      cache: true
+    })
+      .done(function (res) {
+        localStorage.setItem("userInfo", JSON.stringify(res));
+        localStorage.setItem("status", "成功");
+        let img = JSON.parse(localStorage.getItem("userInfo")).id_token;
+        const data = parseJwt(img);
+        $("img").attr("src", data.picture)
+      })
+      .fail(function () {
+        localStorage.setItem("status", "失敗");
+      })
 
 
     function parseJwt(token) {
