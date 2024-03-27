@@ -36,7 +36,7 @@
         dataType: "json",
         data: {
           grant_type: "authorization_code",
-          code: "L7iFXesHyFz8Cc1rjxqT",
+          code: new URL(location.href).searchParams.get("code"),
           redirect_uri: "https://vera-megais.github.io/login/",
           client_id: 2004331642,
           client_secret: "d4250f65da12f7adf52e243c214dcdf0"
