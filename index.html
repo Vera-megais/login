@@ -31,7 +31,9 @@
       link += '&scope=openid%20profile';
       window.location.href = link;
 
-      $.ajax({
+
+
+      await $.ajax({
         url: "https://api.line.me/oauth2/v2.1/token",
         dataType: "json",
         data: {
@@ -44,17 +46,18 @@
         type: "post",
         cache: false
       })
-        .done(await function (res) {
+        .done(function (res) {
           localStorage.setItem("userInfo", JSON.stringify(res));
           localStorage.setItem("status", "成功");
           let img = JSON.parse(localStorage.getItem("userInfo")).id_token;
           const data = parseJwt(img);
           $("img").attr("src", data.picture)
         })
-        .fail(await function () {
+        .fail(function () {
           localStorage.setItem("status", "失敗");
         })
     });
+
 
     function parseJwt(token) {
       var base64Url = token.split('.')[1];
