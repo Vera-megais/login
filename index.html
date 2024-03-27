@@ -20,7 +20,7 @@
   <img src="" alt="">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
   <script>
-    $('#lineLoginBtn').on('click', function (e) {
+    $('#lineLoginBtn').on('click', async function (e) {
       let client_id = '2004331642';
       let redirect_uri = 'https://vera-megais.github.io/login/';
       let link = 'https://access.line.me/oauth2/v2.1/authorize?';
@@ -44,14 +44,14 @@
         type: "post",
         cache: false
       })
-        .done(function (res) {
+        .done(await function (res) {
           localStorage.setItem("userInfo", JSON.stringify(res));
           localStorage.setItem("status", "成功");
           let img = JSON.parse(localStorage.getItem("userInfo")).id_token;
           const data = parseJwt(img);
           $("img").attr("src", data.picture)
         })
-        .fail(function () {
+        .fail(await function () {
           localStorage.setItem("status", "失敗");
         })
     });
